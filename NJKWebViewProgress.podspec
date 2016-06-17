@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/zhoulincome/NJKWebViewProgress"
   s.authors      = { "zhoulincome" => "359344816@qq.com" }
   s.source       = { :git => "https://github.com/zhoulincome/NJKWebViewProgress.git", :tag => "v#{s.version}" }
-  s.platform     = :ios, '4.3'
+  s.platform     = :ios, '7.0'
   s.requires_arc = true
   s.subspec 'Core' do |ss|
     ss.source_files = 'NJKWebViewProgress/NJKWebViewProgress.{h,m}'
