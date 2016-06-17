@@ -103,6 +103,9 @@ const float NJKFinalProgressValue = 0.9f;
         _currentURL = request.URL;
         [self reset];
     }
+    if (self.startRquest) {
+        return self.startRquest(webView,request,navigationType);
+    }
     return ret;
 }
 
@@ -116,6 +119,9 @@ const float NJKFinalProgressValue = 0.9f;
     _maxLoadCount = fmax(_maxLoadCount, _loadingCount);
 
     [self startProgress];
+    if (self.didStartLoad) {
+        self.didStartLoad(webView);
+    }
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
@@ -141,6 +147,9 @@ const float NJKFinalProgressValue = 0.9f;
     if (complete && isNotRedirect) {
         [self completeProgress];
     }
+    if (self.didFinishLoad) {
+        self.didFinishLoad(webView);
+    }
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
@@ -165,6 +174,9 @@ const float NJKFinalProgressValue = 0.9f;
     BOOL complete = [readyState isEqualToString:@"complete"];
     if ((complete && isNotRedirect) || error) {
         [self completeProgress];
+    }
+    if (self.didFailLoad) {
+        self.didFailLoad(webView,error);
     }
 }
 
